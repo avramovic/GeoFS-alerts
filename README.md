@@ -4,10 +4,10 @@ GPWS and other audio alerts for your airplane.
 This Tampermonkey userscript provides support for GPWS/TCAS/whatever alerts for your airplane. 
 
 ## List of alerts
-- stall alert (stall, stall)
+- stall alert (stick shaker, stall, stall)
 - bank angle (when roll is over 40 degrees)
 - overspeed (when over 350 kts)
-- autopilot (stick shaker when ap is turned off)
+- autopilot (when ap is turned off)
 - terrain (when ground is closer than 1000 ft)
 - low gear (when flying low without gear down)
 - low flaps (when flying low without extended flaps)
