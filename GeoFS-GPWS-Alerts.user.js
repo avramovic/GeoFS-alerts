@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         GeoFS TCAS GPWS Alerts
+// @name         GeoFS GPWS Alerts
 // @namespace    https://avramovic.info/
 // @version      2025-01-11
-// @description  TCAS and GPWS alerts for GeoFS
+// @description  GPWS and other alerts for GeoFS
 // @author       Nemanja Avramovic
 // @match        https://www.geo-fs.com/geofs.php*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=geo-fs.com

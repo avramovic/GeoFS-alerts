@@ -1,5 +1,5 @@
 # GeoFS-alerts
-GPWS/TCAS/whatever audio alerts for your airplane.
+GPWS and other audio alerts for your airplane.
 
 This Tampermonkey userscript provides support for GPWS/TCAS/whatever alerts for your airplane. 
 
@@ -24,4 +24,4 @@ issue here on Github and i'll try to fix it.
 - [Tampermonkey](https://www.tampermonkey.net/)
 
 ## Installation
-[Install GeoFS-alerts](https://github.com/avramovic/geofs-alerts/raw/master/GeoFS-TCAS-GPWS-Alerts.user.js)
+[Install GeoFS-alerts](https://github.com/avramovic/geofs-alerts/raw/master/GeoFS-GPWS-Alerts.user.js)
