@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GeoFS GPWS Alerts
 // @namespace    https://avramovic.info/
-// @version      2025-01-11
+// @version      2025-01-12
 // @description  GPWS and other alerts for GeoFS
 // @author       Nemanja Avramovic
 // @match        https://www.geo-fs.com/geofs.php*
@@ -319,12 +319,15 @@
         // stall alert
         !isOnGround() && isStalling() ? stickShake.play() : stickShake.pause();
 
+        const fastPlanes = ["F-16 Fighting Falcon", "Concorde", "Sukhoi Su-35", "Boeing F/A-18F Super Hornet", "Wingsuit"];
+
         // bank angle alert
-        Math.abs(unsafeWindow.geofs.animation.values.aroll) > 40 ? bankangle.play() : bankangle.pause();
+        if (!fastPlanes.includes(unsafeWindow.geofs.aircraft.instance.aircraftRecord.name.trim())) {
+            Math.abs(unsafeWindow.geofs.animation.values.aroll) > 40 ? bankangle.play() : bankangle.pause();
+        }
 
         // indicated airspeed overspeed alert
-        const noAirspeedWarning = ["F-16 Fighting Falcon", "Concorde", "Sukhoi Su-35", "Boeing F/A-18F Super Hornet", "Wingsuit"];
-        if (!noAirspeedWarning.includes(unsafeWindow.geofs.aircraft.instance.aircraftRecord.name.trim())) {
+        if (!fastPlanes.includes(unsafeWindow.geofs.aircraft.instance.aircraftRecord.name.trim())) {
             unsafeWindow.geofs.animation.values.kias > 351 ? overspeed.play() : overspeed.pause();
         }
 
