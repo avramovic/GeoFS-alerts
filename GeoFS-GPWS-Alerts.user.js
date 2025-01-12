@@ -324,8 +324,8 @@
 
         // indicated airspeed overspeed alert
         const noAirspeedWarning = ["F-16 Fighting Falcon", "Concorde", "Sukhoi Su-35", "Boeing F/A-18F Super Hornet", "Wingsuit"];
-        if (!noAirspeedWarning.includes(unsafeWindow.geofs.aircraft.instance.aircraftRecord.name)) {
-            unsafeWindow.geofs.animation.values.kias > 350 ? overspeed.play() : overspeed.pause();
+        if (!noAirspeedWarning.includes(unsafeWindow.geofs.aircraft.instance.aircraftRecord.name.trim())) {
+            unsafeWindow.geofs.animation.values.kias > 351 ? overspeed.play() : overspeed.pause();
         }
 
         // autopilot disconnect alert
