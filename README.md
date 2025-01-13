@@ -6,7 +6,7 @@ This Tampermonkey userscript provides support for GPWS/TCAS/whatever alerts for 
 ## List of alerts
 - stall alert (stick shaker, stall, stall)
 - bank angle (when roll is over 40 degrees)
-- overspeed (when over 350 kts)
+- overspeed (when over VNO speed, if defined, or 350 kts if not)
 - autopilot (when ap is turned off)
 - terrain (when ground is closer than 1000 ft)
 - low gear (when flying low without gear down)
