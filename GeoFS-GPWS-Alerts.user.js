@@ -4,7 +4,6 @@
 // @version      2025-01-13
 // @description  GPWS and other alerts for GeoFS
 // @author       Nemanja Avramovic
-// @license      MIT
 // @match        https://www.geo-fs.com/geofs.php*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=geo-fs.com
 // @grant        GM.getResourceUrl
@@ -344,7 +343,7 @@
         apWasOn = apIsOn;
 
         // terrain alert
-        if (isGearUp() && groundAltitude() <= 1000) {
+        if (isGearUp() && groundAltitude() <= 1000 && !isOnGround() && isEngineOn()) {
             terrain.play();
         } else {
             terrain.pause();
