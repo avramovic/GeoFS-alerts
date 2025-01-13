@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GeoFS GPWS Alerts
 // @namespace    https://avramovic.info/
-// @version      2025-01-13
+// @version      1.0.5
 // @description  GPWS and other alerts for GeoFS
 // @author       Nemanja Avramovic
 // @match        https://www.geo-fs.com/geofs.php*
