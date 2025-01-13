@@ -327,8 +327,8 @@
         }
 
         // indicated airspeed overspeed alert
-        if (!fastPlanes.includes(unsafeWindow.geofs.aircraft.instance.aircraftRecord.name.trim())) {
-            unsafeWindow.geofs.animation.values.kias > 351 ? overspeed.play() : overspeed.pause();
+        if (unsafeWindow.geofs.animation.values.VNO > 0) {
+            unsafeWindow.geofs.animation.values.kias > unsafeWindow.geofs.animation.values.VNO+1 ? overspeed.play() : overspeed.pause();
         }
 
         // autopilot disconnect alert
