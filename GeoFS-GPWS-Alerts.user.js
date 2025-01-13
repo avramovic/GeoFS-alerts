@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GeoFS GPWS Alerts
 // @namespace    https://avramovic.info/
-// @version      2025-01-12
+// @version      2025-01-13
 // @description  GPWS and other alerts for GeoFS
 // @author       Nemanja Avramovic
 // @match        https://www.geo-fs.com/geofs.php*
@@ -418,7 +418,7 @@
         oldAltitude = altitude;
 
         // retard alert
-        if (!wasOnGround && isOnGround() && !isCrashed() && isEngineOn()) {
+        if (!wasOnGround && isOnGround() && !isCrashed() && isEngineOn() && isGearDown()) {
             retard.play();
         }
         wasOnGround = isOnGround();
