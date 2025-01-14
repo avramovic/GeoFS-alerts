@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GeoFS GPWS Alerts
 // @namespace    https://avramovic.info/
-// @version      1.0.5
+// @version      1.0.6
 // @description  GPWS and other alerts for GeoFS
 // @author       Nemanja Avramovic
 // @match        https://www.geo-fs.com/geofs.php*
@@ -16,7 +16,7 @@
 // @resource     lowflaps https://github.com/avramovic/geofs-alerts/raw/master/audio/too-low-flaps.mp3
 // @resource     sinkrate https://github.com/avramovic/geofs-alerts/raw/master/audio/sink-rate.mp3
 // @resource     minimums https://github.com/avramovic/geofs-alerts/raw/master/audio/minimums.mp3
-// @resource     plus100 https://github.com/avramovic/geofs-alerts/raw/master/audio/plus-100.mp3
+// @resource     approaching https://github.com/avramovic/geofs-alerts/raw/master/audio/approaching-minimums.mp3
 // @resource     retard https://github.com/avramovic/geofs-alerts/raw/master/audio/airbus-retard.mp3
 // @resource     h2500 https://github.com/avramovic/geofs-alerts/raw/master/audio/2500.mp3
 // @resource     h1000 https://github.com/avramovic/geofs-alerts/raw/master/audio/1000.mp3
@@ -37,146 +37,146 @@
     'use strict';
     // load the audio clips
     let stickShake;
-    GM.getResourceUrl("stall").then((url) => {
-        stickShake = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("stall").then((data) => {
+        stickShake = new Audio('data:audio/mp3;'+data);
         stickShake.loop = true;
     });
 
     let bankangle;
-    GM.getResourceUrl("bankangle").then((url) => {
-        bankangle = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("bankangle").then((data) => {
+        bankangle = new Audio('data:audio/mp3;'+data);
         bankangle.loop = true;
     });
 
     let overspeed;
-    GM.getResourceUrl("overspeed").then((url) => {
-        overspeed = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("overspeed").then((data) => {
+        overspeed = new Audio('data:audio/mp3;'+data);
         overspeed.loop = true;
     });
 
     let autopilot;
-    GM.getResourceUrl("autopilot").then((url) => {
-        autopilot = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("autopilot").then((data) => {
+        autopilot = new Audio('data:audio/mp3;'+data);
         autopilot.loop = false;
     });
 
     let terrain;
-    GM.getResourceUrl("terrain").then((url) => {
-        terrain = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("terrain").then((data) => {
+        terrain = new Audio('data:audio/mp3;'+data);
         terrain.loop = true;
     });
 
     let lowgear;
-    GM.getResourceUrl("lowgear").then((url) => {
-        lowgear = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("lowgear").then((data) => {
+        lowgear = new Audio('data:audio/mp3;'+data);
         lowgear.loop = true;
     });
 
     let lowflaps;
-    GM.getResourceUrl("lowflaps").then((url) => {
-        lowflaps = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("lowflaps").then((data) => {
+        lowflaps = new Audio('data:audio/mp3;'+data);
         lowflaps.loop = true;
     });
 
     let sinkrate;
-    GM.getResourceUrl("sinkrate").then((url) => {
-        sinkrate = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("sinkrate").then((data) => {
+        sinkrate = new Audio('data:audio/mp3;'+data);
         sinkrate.loop = true;
     });
 
-    let plus100;
-    GM.getResourceUrl("plus100").then((url) => {
-        plus100 = new Audio('data:audio/mp3;'+url);
-        plus100.loop = false;
+    let approaching;
+    GM.getResourceUrl("approaching").then((data) => {
+        approaching = new Audio('data:audio/mp3;'+data);
+        approaching.loop = false;
     });
 
     let h2500;
-    GM.getResourceUrl("h2500").then((url) => {
-        h2500 = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("h2500").then((data) => {
+        h2500 = new Audio('data:audio/mp3;'+data);
         h2500.loop = false;
     });
 
     let h1000;
-    GM.getResourceUrl("h1000").then((url) => {
-        h1000 = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("h1000").then((data) => {
+        h1000 = new Audio('data:audio/mp3;'+data);
         h1000.loop = false;
     });
 
     let h500;
-    GM.getResourceUrl("h500").then((url) => {
-        h500 = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("h500").then((data) => {
+        h500 = new Audio('data:audio/mp3;'+data);
         h500.loop = false;
     });
 
     let h400;
-    GM.getResourceUrl("h400").then((url) => {
-        h400 = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("h400").then((data) => {
+        h400 = new Audio('data:audio/mp3;'+data);
         h400.loop = false;
     });
 
     let h300;
-    GM.getResourceUrl("h300").then((url) => {
-        h300 = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("h300").then((data) => {
+        h300 = new Audio('data:audio/mp3;'+data);
         h300.loop = false;
     });
 
     let h200;
-    GM.getResourceUrl("h200").then((url) => {
-        h200 = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("h200").then((data) => {
+        h200 = new Audio('data:audio/mp3;'+data);
         h200.loop = false;
     });
 
     let h100;
-    GM.getResourceUrl("h100").then((url) => {
-        h100 = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("h100").then((data) => {
+        h100 = new Audio('data:audio/mp3;'+data);
         h100.loop = false;
     });
 
     let h50;
-    GM.getResourceUrl("h50").then((url) => {
-        h50 = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("h50").then((data) => {
+        h50 = new Audio('data:audio/mp3;'+data);
         h50.loop = false;
     });
 
     let h40;
-    GM.getResourceUrl("h40").then((url) => {
-        h40 = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("h40").then((data) => {
+        h40 = new Audio('data:audio/mp3;'+data);
         h40.loop = false;
     });
 
     let h30;
-    GM.getResourceUrl("h30").then((url) => {
-        h30 = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("h30").then((data) => {
+        h30 = new Audio('data:audio/mp3;'+data);
         h30.loop = false;
     });
 
     let h20;
-    GM.getResourceUrl("h20").then((url) => {
-        h20 = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("h20").then((data) => {
+        h20 = new Audio('data:audio/mp3;'+data);
         h20.loop = false;
     });
 
     let h10;
-    GM.getResourceUrl("h10").then((url) => {
-        h10 = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("h10").then((data) => {
+        h10 = new Audio('data:audio/mp3;'+data);
         h10.loop = false;
     });
 
     let h5;
-    GM.getResourceUrl("h5").then((url) => {
-        h5 = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("h5").then((data) => {
+        h5 = new Audio('data:audio/mp3;'+data);
         h5.loop = false;
     });
 
     let minimums;
-    GM.getResourceUrl("minimums").then((url) => {
-        minimums = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("minimums").then((data) => {
+        minimums = new Audio('data:audio/mp3;'+data);
         minimums.loop = false;
     });
 
     let retard;
-    GM.getResourceUrl("retard").then((url) => {
-        retard = new Audio('data:audio/mp3;'+url);
+    GM.getResourceUrl("retard").then((data) => {
+        retard = new Audio('data:audio/mp3;'+data);
         retard.loop = false;
     });
 
@@ -391,24 +391,26 @@
                 h500.play();
             } else if (oldAltitude > 400 && altitude <= 400) {
                 h400.play();
+            } else if (oldAltitude > 350 && altitude <= 350) {
+                approaching.play();
             } else if (oldAltitude > 300 && altitude <= 300) {
                 h300.play();
             } else if (oldAltitude > 200 && altitude <= 200) {
                 h200.play();
             } else if (oldAltitude > 150 && altitude <= 150) {
-                plus100.play();
+                minimums.play();
             } else if (oldAltitude > 100 && altitude <= 100) {
                 h100.play();
             } else if (oldAltitude > 50 && altitude <= 50) {
                 h50.play();
             } else if (oldAltitude > 40 && altitude <= 40) {
                 h40.play();
-            } else if (oldAltitude > 45 && altitude <= 45) {
-                minimums.play();
             } else if (oldAltitude > 30 && altitude <= 30) {
                 h30.play();
             } else if (oldAltitude > 20 && altitude <= 20) {
                 h20.play();
+            } else if (oldAltitude > 15 && altitude <= 15 && isEngineOn()) {
+                retard.play();
             } else if (oldAltitude > 10 && altitude <= 10) {
                 h10.play();
             } else if (oldAltitude > 5 && altitude <= 5) {
@@ -417,11 +419,6 @@
         }
 
         oldAltitude = altitude;
-
-        // retard alert
-        if (!wasOnGround && isOnGround() && !isCrashed() && isEngineOn() && isGearDown()) {
-            retard.play();
-        }
         wasOnGround = isOnGround();
     }
 })();
