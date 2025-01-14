@@ -409,14 +409,16 @@
                 h30.play();
             } else if (oldAltitude > 20 && altitude <= 20) {
                 h20.play();
-            } else if (oldAltitude > 15 && altitude <= 15 && isEngineOn()) {
-                retard.play();
+                if (isEngineOn()) {
+                    retard.play();
+                }
             } else if (oldAltitude > 10 && altitude <= 10) {
                 h10.play();
             } else if (oldAltitude > 5 && altitude <= 5) {
                 h5.play();
             }
         }
+
 
         oldAltitude = altitude;
         wasOnGround = isOnGround();
