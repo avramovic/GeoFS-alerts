@@ -180,13 +180,10 @@
         retard.loop = false;
     });
 
-
     let apWasOn = false;
     let apIsOn = false;
     let oldAltitude = 0;
     let altitude = 0;
-    let wasOnGround = true;
-
 
     // wait until flight sim is fully loaded
     let itv = setInterval(
@@ -419,8 +416,6 @@
             }
         }
 
-
         oldAltitude = altitude;
-        wasOnGround = isOnGround();
     }
 })();
