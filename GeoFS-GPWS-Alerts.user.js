@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GeoFS GPWS Alerts
 // @namespace    https://avramovic.info/
-// @version      1.0.6
+// @version      1.0.7
 // @description  GPWS and other alerts for GeoFS
 // @author       Nemanja Avramovic
 // @match        https://www.geo-fs.com/geofs.php*
@@ -305,6 +305,10 @@
         return nearestAirport;
     }
 
+    Audio.prototype.stop = function() {
+        this.pause();
+        this.currentTime = 0;
+    };
 
     function mainLoop(){
 
@@ -314,19 +318,19 @@
         }
 
         // stall alert
-        !isOnGround() && isStalling() ? stickShake.play() : stickShake.pause();
+        !isOnGround() && isStalling() ? stickShake.play() : stickShake.stop();
 
         const fastPlanes = ["F-16 Fighting Falcon", "Concorde", "Sukhoi Su-35", "Boeing F/A-18F Super Hornet", "Wingsuit"];
 
         // bank angle alert
         if (!fastPlanes.includes(unsafeWindow.geofs.aircraft.instance.aircraftRecord.name.trim())) {
-            Math.abs(unsafeWindow.geofs.animation.values.aroll) > 40 ? bankangle.play() : bankangle.pause();
+            Math.abs(unsafeWindow.geofs.animation.values.aroll) > 40 ? bankangle.play() : bankangle.stop();
         }
 
         // indicated airspeed overspeed alert
         if (!fastPlanes.includes(unsafeWindow.geofs.aircraft.instance.aircraftRecord.name.trim())) {
             let maxSpeed = unsafeWindow.geofs.animation.values.VNO > 0 ? unsafeWindow.geofs.animation.values.VNO+1 : 350;
-            unsafeWindow.geofs.animation.values.kias > maxSpeed ? overspeed.play() : overspeed.pause();
+            unsafeWindow.geofs.animation.values.kias > maxSpeed ? overspeed.play() : overspeed.stop();
         }
 
         // autopilot disconnect alert
@@ -334,9 +338,7 @@
         if (apWasOn && !apIsOn) {
             autopilot.play();
         } else if (!apWasOn && apIsOn) {
-            autopilot.pause();
-            autopilot.currentTime = 0;
-
+            autopilot.stop();
         }
         apWasOn = apIsOn;
 
@@ -344,8 +346,7 @@
         if (isGearUp() && groundAltitude() <= 1000 && !isOnGround() && isEngineOn()) {
             terrain.play();
         } else {
-            terrain.pause();
-            terrain.currentTime = 0;
+            terrain.stop();
         }
 
 
@@ -354,27 +355,23 @@
             if (isGearUp()) {
                 lowgear.play();
             } else {
-                lowgear.pause();
-                lowgear.currentTime = 0;
+                lowgear.stop();
 
                 if (flapsRetracted()) {
                     lowflaps.play();
                 } else {
-                    lowflaps.pause();
-                    lowflaps.currentTime = 0;
+                    lowflaps.stop();
                 }
             }
 
         } else {
-            lowgear.pause();
-            lowgear.currentTime = 0;
-            lowflaps.pause();
-            lowflaps.currentTime = 0;
+            lowgear.stop();
+            lowflaps.stop();
         }
 
 
         // sink rate
-        isSinking() ? sinkrate.play() : sinkrate.pause();
+        isSinking() ? sinkrate.play() : sinkrate.stop();
 
         // height callouts when fully configured for landing and near airport
         altitude = groundAltitude();
